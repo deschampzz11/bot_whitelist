@@ -1,6 +1,7 @@
 const truewallet = require('../../apis/truewallet');
 const { MessageEmbed } = require('discord.js');
 const dbwhitelist = require('../../DB/whitelist.js');
+const whitelist = require('../../DB/whitelist.js');
 
 module.exports = {
   name: "buy",
@@ -15,6 +16,10 @@ module.exports = {
     await message.delete();
 
 dbwhitelist.findOne({ userID: message.author.id }, async (err, user) => {
+
+  if(whitelist) {
+    message.channel.send({ embeds: [new MessageEmbed().setDescription(`[ ! ] ${message.author.name} มีไวริสแล้ว`).setColor('RED')] })
+  }
 
   let errurl = new MessageEmbed()
   .setTitle('ไม่พบลิ้งอังเปา')
@@ -45,8 +50,6 @@ dbwhitelist.findOne({ userID: message.author.id }, async (err, user) => {
             });
             newwhitelist.save().catch(err => console.log(err));
             message.channel.send({ embeds: [new MessageEmbed().setDescription(`[ + ] ${message.author.name} ถูกเพิ่มลงในไวริสแล้ว`).setColor('GREEN')] })
-        } else {
-            message.channel.send({ embeds: [new MessageEmbed().setDescription(`[ ! ] ${message.author.name} มีไวริสแล้ว`).setColor('RED')] })
         }
       }
     });
