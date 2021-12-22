@@ -3,7 +3,7 @@ const dbwhitelist = require('../../DB/whitelist.js');
 
 
 module.exports = {
-    name: "s",
+    name: "script",
     /**
      *
      * @param {Client} client
