@@ -31,7 +31,6 @@ module.exports = {
                     .setOptions([
                         {
                             label: 'Blox Fruit',
-                            description: 'สคริปต์ Blox Fruit',
                             value: 'bloxfruit',
                             emoji: '<:BF:923198898070249502>'
                         }
