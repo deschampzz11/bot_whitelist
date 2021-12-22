@@ -17,9 +17,7 @@ module.exports = {
 
 dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
 
-  if(whitelist) {
-    return message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ ! ]** <@${message.author.id}> มีไวริสแล้ว`).setColor('RED')] })
-  }
+  if(whitelist) return message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ ! ]** <@${message.author.id}> มีไวริสแล้ว`).setColor('RED')] });
 
   let errurl = new MessageEmbed()
   .setTitle('ไม่พบลิ้งอังเปา')
