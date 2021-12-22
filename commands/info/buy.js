@@ -18,7 +18,7 @@ module.exports = {
 dbwhitelist.findOne({ userID: message.author.id }, async (err, user) => {
 
   if(whitelist) {
-    return message.channel.send({ embeds: [new MessageEmbed().setDescription(`[ ! ] <@${message.author.id}> มีไวริสแล้ว`).setColor('RED')] })
+    return message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ ! ]** <@${message.author.id}> มีไวริสแล้ว`).setColor('RED')] })
   }
 
   let errurl = new MessageEmbed()
@@ -49,7 +49,7 @@ dbwhitelist.findOne({ userID: message.author.id }, async (err, user) => {
                 userID: user.userID
             });
             newwhitelist.save().catch(err => console.log(err));
-            message.channel.send({ embeds: [new MessageEmbed().setDescription(`[ + ] ${message.author.name} ถูกเพิ่มลงในไวริสแล้ว`).setColor('GREEN')] })
+            message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ + ]** ${message.author.name} ถูกเพิ่มลงในไวริสแล้ว`).setColor('GREEN')] })
         }
       }
     });
