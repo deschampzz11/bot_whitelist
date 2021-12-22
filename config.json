@@ -1,7 +1,7 @@
 {
     "token": "OTIwOTA4MTIxMjIyODM2MjM1.YbrMhQ.09AAyC4nQMXDtYlJGDsI7rdq3lw",
     "prefix": "!",
-    "ownerID": "['749597750110322719']",
+    "ownerID": "['749597750110322719', '856395268362338375']",
     "wallet": "0647231879",
     "db": "mongodb+srv://kapooz:A5CS8ghh3e6UiW4@cluster0.mwyxq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
