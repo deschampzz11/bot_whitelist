@@ -1,5 +1,6 @@
 const truewallet = require('../../apis/truewallet');
 const { MessageEmbed } = require('discord.js');
+const dbwhitelist = require('../../DB/whitelist.js');
 
 module.exports = {
   name: "buy",
@@ -12,6 +13,8 @@ module.exports = {
   run: async (client, message, args) => {
 
     await message.delete();
+
+dbwhitelist.findOne({ userID: message.author.id }, async (err, user) => {
 
     let errurl = new MessageEmbed()
     .setTitle('ไม่พบลิ้งอังเปา')
@@ -39,22 +42,18 @@ let tw_gif = args[0]
           message.channel.send({ embeds: [errnum] })
 
       }else{
-        let checkwhitelist = await client.get(message.author.tag);
-
-        if(checkwhitelist) {
-            let have = new MessageEmbed()
-            .setTitle("[ ! ] Check Whitelist")
-            .setDescription("คุณมี whitelist แล้ว")
-            .setColor("RED")
-            message.channel.send({ embeds: [have] });
+        if(!whitelist) {
+            const newwhitelist = new dbwhitelist({
+                name: user.user.username,
+                userID: user.userID
+            });
+            newwhitelist.save().catch(err => console.log(err));
+            message.channel.send({ embeds: [new MessageEmbed().setDescription(`[ + ] ${message.author.name} ถูกเพิ่มลงในไวริสแล้ว`).setColor('GREEN')] })
         } else {
-            let success = new MessageEmbed()
-            .setDescription("ซื้อ whitelist เรียบร้อยแล้ว")
-            .setColor("GREEN")
-            message.channel.send({ embeds: [success] });
-            client.set(message.author.tag, message.author.id);
+            message.channel.send({ embeds: [new MessageEmbed().setDescription(`[ ! ] ${message.author.name} มีไวริสแล้ว`).setColor('RED')] })
         }
       }
     });
   }
+});
 }};
