@@ -15,7 +15,7 @@ module.exports = {
 
     await message.delete();
 
-dbwhitelist.findOne({ userID: message.author.id }, async (err, user) => {
+dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
 
   if(whitelist) {
     return message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ ! ]** <@${message.author.id}> มีไวริสแล้ว`).setColor('RED')] })
