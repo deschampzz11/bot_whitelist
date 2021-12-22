@@ -13,7 +13,7 @@ module.exports = {
     run: async (client, message, args) => {
         dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
             if(!whitelist) {
-                msgerr(`**[ ! ]**  ท่านไม่มีสิทธิ์ใช้คำสั่งนี้`);
+                msgerr(`**[ ! ]**  ท่านไม่มีไวริสกรุณาสั่งซื้อไวริสก่อนนะครับ :)`);
             } else {
                 const eb = new MessageEmbed()
                 .setColor('GREEN')
