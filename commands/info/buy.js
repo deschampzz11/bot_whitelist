@@ -30,9 +30,7 @@ dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
   .setDescription(`\`\`\`diff\n- ${message.author.username} กรุณาลองอีกครั้งน้า\`\`\``)
   .setColor('RED')
   let tw_gif = args[0]
-  if(!tw_gif){
-    message.channel.send({ embeds: [errurl] })
-  }
+  if(!tw_gif) return message.channel.send({ embeds: [errurl] });
   if(tw_gif){
     
     truewallet.redeemvouchers(client.config.wallet, tw_gif)
@@ -40,17 +38,17 @@ dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
     .then(async (res) => {
       if(res.amount === null || res.amount === undefined){
         message.channel.send({ embeds: [errnum] })
-      }else{
+      } else {
         if(!whitelist) {
             const newwhitelist = new dbwhitelist({
                 name: user.user.username,
                 userID: user.userID
             });
             newwhitelist.save().catch(err => console.log(err));
-            message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ + ]** ${message.author.name} ถูกเพิ่มลงในไวริสแล้ว`).setColor('GREEN')] })
+            message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ + ]** ${message.author.name} ถูกเพิ่มลงในไวริสแล้ว`).setColor('GREEN')] });
         }
       }
     });
-  }
+  };
 });
 }};
