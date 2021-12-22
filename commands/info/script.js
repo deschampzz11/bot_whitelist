@@ -46,7 +46,7 @@ module.exports = {
                         const bloxfruit = new MessageEmbed()
                         .setColor('GREEN')
                         .setTitle('Blox Fruit')
-                        .setDescription(`\`\`\`lua\nloadstring(game:HttpGet("https://MISEHUB.lua")\`\`\``)
+                        .setDescription(`\`\`\`lua\nloadstring(game:HttpGet("https://testbot.lua")\`\`\``)
                         eb.setDescription(`ผมส่งไปในแชทส่วนตัวแล้วครับ`);
                         msg.edit({ embeds: [success], components: [] });
                         message.author.send({ embeds: [bloxfruit] });
