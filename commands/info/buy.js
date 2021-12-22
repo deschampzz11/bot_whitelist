@@ -12,9 +12,10 @@ module.exports = {
    */
   run: async (client, message, args) => {
 
+    await message.delete();
+
 dbwhitelist.findOne({ userID: message.author.id }, async (err, user) => {
-  await message.delete();
-  
+
   let errurl = new MessageEmbed()
   .setTitle('ไม่พบลิ้งอังเปา')
   .setDescription("```diff\n- กรุณาใส้ลิ้งซองด้วยน้า```")
