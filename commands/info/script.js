@@ -32,12 +32,8 @@ module.exports = {
                         {
                             label: 'Blox Fruit',
                             description: 'สคริปต์ Blox Fruit',
-                            value: 'bloxfruit'
-                        },
-                        {
-                            label: 'Grand Piece',
-                            description: 'สคริปต์ Grand Piece',
-                            value: 'grandpiece'
+                            value: 'bloxfruit',
+                            emoji: '<:BF:923198898070249502>'
                         }
                     ])
                 )
@@ -55,14 +51,6 @@ module.exports = {
                         eb.setDescription(`ผมส่งไปในแชทส่วนตัวแล้วครับ`);
                         msg.edit({ embeds: [success], components: [] });
                         message.author.send({ embeds: [bloxfruit] });
-                    }
-                    if(x.values[0] === 'grandpiece') {
-                        const grandpiece = new MessageEmbed()
-                        .setColor('GREEN')
-                        .setTitle('Grand Piece')
-                        .setDescription(`\`\`\`lua\nloadstring(game:HttpGet("https://MISEHUB.lua")\`\`\``)
-                        msg.edit({ embeds: [success], components: [] });
-                        message.author.send({ embeds: [grandpiece] });
                     }
             })
             }
