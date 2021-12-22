@@ -1,0 +1,79 @@
+const { MessageEmbed, MessageSelectMenu, MessageActionRow } = require('discord.js');
+const dbwhitelist = require('../../DB/whitelist.js');
+
+
+module.exports = {
+    name: "s",
+    /**
+     *
+     * @param {Client} client
+     * @param {Message} message
+     * @param {String[]} args
+     */
+    run: async (client, message, args) => {
+        dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
+            if(!whitelist) {
+                msgerr(`**[ ! ]**  ท่านไม่มีสิทธิ์ใช้คำสั่งนี้`);
+            } else {
+                const eb = new MessageEmbed()
+                .setColor('GREEN')
+                .setDescription(`กรุณาเลือกสคริปต์ที่ต้องการ`)
+
+                const success = new MessageEmbed()
+                .setColor('GREEN')
+                .setDescription(`ผมส่งไปในแชทส่วนตัวแล้วครับ`)
+
+                const row = new MessageActionRow()
+                .addComponents(
+                    new MessageSelectMenu()
+                    .setCustomId('script')
+                    .setPlaceholder('กรุณาเลือกสคริปต์ของคุณ')
+                    .setOptions([
+                        {
+                            label: 'Blox Fruit',
+                            description: 'สคริปต์ Blox Fruit',
+                            value: 'bloxfruit'
+                        },
+                        {
+                            label: 'Grand Piece',
+                            description: 'สคริปต์ Grand Piece',
+                            value: 'grandpiece'
+                        }
+                    ])
+                )
+                var msg = await message.channel.send({ embeds: [eb], components: [row] });
+                const filter = (x) => x.user.id === message.author.id;
+                const collector = msg.createMessageComponentCollector({ filter, time: 300000});
+            
+                collector.on('collect', async x => {
+                    x.deferUpdate()
+                    if(x.values[0] === 'bloxfruit') {
+                        const bloxfruit = new MessageEmbed()
+                        .setColor('GREEN')
+                        .setTitle('Blox Fruit')
+                        .setDescription(`\`\`\`lua\nloadstring(game:HttpGet("https://MISEHUB.lua")\`\`\``)
+                        eb.setDescription(`ผมส่งไปในแชทส่วนตัวแล้วครับ`);
+                        msg.edit({ embeds: [success], components: [] });
+                        message.author.send({ embeds: [bloxfruit] });
+                    }
+                    if(x.values[0] === 'grandpiece') {
+                        const grandpiece = new MessageEmbed()
+                        .setColor('GREEN')
+                        .setTitle('Grand Piece')
+                        .setDescription(`\`\`\`lua\nloadstring(game:HttpGet("https://MISEHUB.lua")\`\`\``)
+                        msg.edit({ embeds: [success], components: [] });
+                        message.author.send({ embeds: [grandpiece] });
+                    }
+            })
+            }
+        }
+        );
+
+        function msgerr(content) {
+            var msgerr = new MessageEmbed()
+            .setColor('#ff0000')
+            .setDescription(content)
+            message.channel.send({ embeds: [msgerr] });
+        }
+
+    }}
