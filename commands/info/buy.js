@@ -12,6 +12,7 @@ module.exports = {
    * @param {String[]} args
    */
   run: async (client, message, args) => {
+    if (!message.guild.me.hasPermission("MANAGE_MESSAGES")) return message.channel.send("ขออภัยครับ ฉันไม่สามารถลบข้อความได้ครับ");
 
     await message.delete();
 
@@ -21,7 +22,7 @@ dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
 
   let errurl = new MessageEmbed()
   .setTitle('ไม่พบลิ้งอังเปา')
-  .setDescription("```diff\n- กรุณาใส้ลิ้งซองด้วยน้า```")
+  .setDescription(`\`\`\`diff\n- ${message.author.username} กรุณาใส้ลิ้งซองด้วยน้า\`\`\``)
   .setThumbnail("https://images-ext-1.discordapp.net/external/nCLyCoFKrSceZiXoAnWsnycEYmL3bqD24rWs-7IZPEM/https/i.vgy.me/ss9v5e.gif")
   .setColor('RED')
   
@@ -38,17 +39,19 @@ dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
     .then(async (res) => {
       if(res.amount === null || res.amount === undefined){
         message.channel.send({ embeds: [errnum] })
-      } else {
-        if(!whitelist) {
+      } else
+        if(res.amount < 89){
+          message.channel.send({ embeds: [errnum] })
+        } else
+          if(!whitelist) {
             const newwhitelist = new dbwhitelist({
-                name: user.user.username,
-                userID: user.userID
+              name: user.user.username,
+              userID: user.userID
             });
             newwhitelist.save().catch(err => console.log(err));
             message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ + ]** ${message.author.name} ถูกเพิ่มลงในไวริสแล้ว`).setColor('GREEN')] });
-        }
-      }
+          }
+        })
+      };
     });
-  };
-});
-}};
+  }};
