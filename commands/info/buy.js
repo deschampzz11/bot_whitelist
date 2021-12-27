@@ -39,10 +39,7 @@ dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
     .then(async (res) => {
       if(res.amount === null || res.amount === undefined){
         message.channel.send({ embeds: [errnum] })
-      } else
-        if(res.amount < 89){
-          message.channel.send({ embeds: [errnum] })
-        } else
+      } else {
           if(!whitelist) {
             const newwhitelist = new dbwhitelist({
               name: user.user.username,
@@ -51,6 +48,7 @@ dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
             newwhitelist.save().catch(err => console.log(err));
             message.channel.send({ embeds: [new MessageEmbed().setDescription(`**[ + ]** ${message.author.name} ถูกเพิ่มลงในไวริสแล้ว`).setColor('GREEN')] });
           }
+        }
         })
       };
     });
