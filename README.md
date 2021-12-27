@@ -1,1 +1,3 @@
 # bot_whitelist
+
+[ ศึกษา ]
