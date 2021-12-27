@@ -1,4 +1,4 @@
-//ป้องกันโดย ! x2Mise#2845 HEHEHEHE
+//ป้องกันโดย ! x2Mise#2845 HEHEHEHEE
 
 const fetch = require('node-fetch');
 
