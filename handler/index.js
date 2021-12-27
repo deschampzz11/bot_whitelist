@@ -32,3 +32,5 @@ module.exports = async (client) => {
     client.on("ready", async () => {
     });
 };
+
+//! x2Mise#2845 HEHEHEHEE

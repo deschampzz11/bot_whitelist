@@ -12,3 +12,5 @@ const whitelist = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('whitelist', whitelist);
+
+//! x2Mise#2845 HEHEHEHEE

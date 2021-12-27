@@ -31,3 +31,4 @@ client.on("interactionCreate", async (interaction) => {
         if (command) command.run(client, interaction);
     }
 });
+//! x2Mise#2845 HEHEHEHEE
