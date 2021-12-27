@@ -33,4 +33,4 @@ module.exports = async (client) => {
     });
 };
 
-//! x2Mise#2845 HEHEHEHEE
+//! x2Mise#2845 HEHEHEHEEE
