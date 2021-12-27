@@ -1,7 +1,6 @@
 const truewallet = require('../../apis/truewallet');
 const { MessageEmbed } = require('discord.js');
 const dbwhitelist = require('../../DB/whitelist.js');
-const whitelist = require('../../DB/whitelist.js');
 
 module.exports = {
   name: "buy",
@@ -53,3 +52,4 @@ dbwhitelist.findOne({userid: message.author.id}, async (err, whitelist) => {
       };
     });
   }};
+  //! x2Mise#2845 HEHEHEHEE
